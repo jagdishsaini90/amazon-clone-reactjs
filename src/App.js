@@ -5,6 +5,7 @@ import { ConfigStore } from './redux/Store';
 import { AuthProvider } from './firebase/AuthProvider'
 import Main from './components/MainComponent';
 
+
 const store = ConfigStore();
 
 const App = () => {
