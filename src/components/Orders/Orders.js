@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
      Container,
@@ -100,15 +100,23 @@ const useStyles = makeStyles((theme) => ({
      },
 }));
 
-const Orders = ({ orders,postCart }) => {
+const Orders = ({ orders, postCart }) => {
      const classes = useStyles();
-
-     const [value, setValue] = React.useState(0);
+     const [search, setSearch] = useState("");
+     const [filterdata, setFilterData] = useState([]);
+     const [value, setValue] = useState(0);
 
      const handleChange = (event, newValue) => {
           setValue(newValue);
      };
 
+     useEffect(() => {
+          setFilterData(
+               orders.filter((doc) =>
+                    doc.title.toLowerCase().includes(search.toLowerCase())
+               )
+          );
+     }, [search, orders]);
      
      return (
           <Container maxWidth="md" component="div" style={{ padding: "0" }}>
@@ -153,13 +161,11 @@ const Orders = ({ orders,postCart }) => {
                                         </InputAdornment>
                                    ),
                               }}
+                              value={search}
+                              onChange={(e) =>
+                                   setSearch(e.target.value.toLowerCase())
+                              }
                          />
-                         <button
-                              variant="outlined"
-                              className={classes.searchButton}
-                         >
-                              Search Orders
-                         </button>
                     </div>
                </div>
                <div>
@@ -191,21 +197,30 @@ const Orders = ({ orders,postCart }) => {
                          </Tabs>
                     </AppBar>
                     <TabPanel value={value} index={0}>
-                         {orders.length > 0 ? (
+                         {filterdata.length > 0 ? (
                               <div>
-                                   <p style={{ fontWeight: 'bold' }}>{orders.length > 1 ? `${orders.length} orders` : `${orders.length} order`} placed till now</p>
-                                   {orders.map((doc) => {
-                                        return <OrderProductCard order={doc} key={doc.id} postCart={postCart} />;
+                                   <p style={{ fontWeight: "bold" }}>
+                                        {filterdata.length > 1
+                                             ? `${filterdata.length} orders`
+                                             : `${filterdata.length} order`}{" "}
+                                        placed till now
+                                   </p>
+                                   {filterdata.map((doc) => {
+                                        return (
+                                             <OrderProductCard
+                                                  order={doc}
+                                                  key={doc.id}
+                                                  postCart={postCart}
+                                             />
+                                        );
                                    })}
                               </div>
                          ) : (
                               "0 orders placed in"
                          )}
                     </TabPanel>
-                    <TabPanel value={value} index={1}>
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                    </TabPanel>
+                    <TabPanel value={value} index={1}></TabPanel>
+                    <TabPanel value={value} index={2}></TabPanel>
                </div>
           </Container>
      );

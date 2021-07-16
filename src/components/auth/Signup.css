@@ -39,6 +39,7 @@
      margin-bottom: 10px;
      background-color: white;
      width: 98%;
+     border-radius: 5px;
 }
 
 .login__container > p {
@@ -54,6 +55,7 @@
      border: 1px solid;
      margin-top: 10px;
      border-color: #a88734 #9c7e31 #846a29;
+     cursor: pointer;
 }
 
 .login__registerButton {
@@ -63,10 +65,14 @@
      border: 1px solid;
      margin-top: 10px;
      border-color: rgb(187, 185, 185);
+     cursor: pointer;
 }
 .phone {
      display: flex;
      justify-content: center;
      align-items: center;
      flex-direction: row;
+}
+.input:focus {
+     border: 2px solid #f0c14b;
 }

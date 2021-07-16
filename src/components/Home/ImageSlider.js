@@ -49,7 +49,7 @@ export default function ImageSlider() {
 
   const itemData = [
     {
-      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fpan.jpg?alt=media&token=20ed547c-325e-4082-930f-9bc085c8ed28'
+      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fpan.jpg?alt=media&token=38b7a9c2-4ca3-451c-9498-45b684918c68'
     },
     {
       img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fcable.jpg?alt=media&token=5329928f-6c85-42a3-b946-58001144b420'
@@ -58,13 +58,13 @@ export default function ImageSlider() {
       img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fconnect.jpg?alt=media&token=7644e0a0-15c1-48f5-877e-e9bb6da6418b'
     },
     {
-      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fpillow.jpg?alt=media&token=c25e9128-09f2-47b9-9ea2-54d2fe42d852'
+      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fpillow.jpg?alt=media&token=48c2d6e3-2141-4ac1-a1f0-5d50730c6ef2'
     },
     {
-      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fweight.jpg?alt=media&token=db53fa0a-eca3-4d29-a86e-c3d84bed0146'
+      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fweight.jpg?alt=media&token=75eba00f-ead7-4d64-9287-bfa8e1b88a64'
     },
     {
-      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fmic.jpg?alt=media&token=7a301d37-af8d-4e4a-8ccf-b9a799195e59'
+      img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fmic.jpg?alt=media&token=e5f6cd8a-7fd8-47df-9dc4-0ffe1b959e48'
     },
     {
       img : 'https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Famp.jpg?alt=media&token=e0812c43-4134-4645-b98d-dd9cc8ac0289'

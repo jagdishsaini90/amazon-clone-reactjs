@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme) => ({
      },
      Image: {
           marginRight: "2rem",
-          overflow:'hidden',
+          overflow: "hidden",
           [theme.breakpoints.down("xs")]: {
                width: "80%",
                borderRadius: "5px",
                marginRight: "0",
-               height : '80%'
+               height: "80%",
           },
      },
      title: {
@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 const ProductContent = ({ product, isloading, postCart, length }) => {
      const classes = useStyles();
      const history = useHistory();
-
 
      useEffect(() => {
           window.scrollTo({
@@ -183,6 +182,19 @@ const ProductContent = ({ product, isloading, postCart, length }) => {
                                                             Verified Purchase
                                                        </p>
                                                   </Box>
+                                                  {doc.image ? (
+                                                       <div style={{width:'70px',height:'70px'}}>
+                                                            <img
+                                                                 src={
+                                                                      doc.image
+                                                                           .imgUrl
+                                                                 }
+                                                                 alt=""
+                                                                 width="100%"
+                                                                 height="100%"
+                                                            />
+                                                       </div>
+                                                  ) : null}
                                                   <Typography
                                                        style={{
                                                             fontWeight: "bold",

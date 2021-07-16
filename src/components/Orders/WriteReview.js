@@ -64,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
           },
      },
      showImage: {
+          maxWidth: '200px',
+          maxHeight: '200px',
+          overflow:'hidden',
           [theme.breakpoints.down("xs")]: {
                maxWidth: "250px",
                maxHeight : '250px'
@@ -160,25 +163,25 @@ const WriteReview = ({ WriteProductReview }) => {
           });
      }, []);
 
-     useEffect(() => {
-          firestore.collection('products').doc(id).get()
-               .then(snapshot => {
-                    if(snapshot.data().review)
-                         return snapshot.data().review
-               })
-               .then(list => {
-                    for (var i = 0; i < list.length; i++) {
-                         if (list[i].uid === currentUser.uid) {
-                              setRating(list[i].rating)
-                              setHeadLine(list[i].headline)
-                              setReview(list[i].review)
-                              setName(list[i].name)
-                              setImageAsUrl(list[i].image.imgUrl);
-                              break;
-                         }
-                    }
-          })
-     }, [currentUser.uid,id]);
+     // useEffect(() => {
+     //      firestore.collection('products').doc(id).get()
+     //           .then(snapshot => {
+     //                if(snapshot.data().review)
+     //                     return snapshot.data().review
+     //           })
+     //           .then(list => {
+     //                for (var i = 0; i < list.length; i++) {
+     //                     if (list[i].uid === currentUser.uid) {
+     //                          setRating(list[i].rating)
+     //                          setHeadLine(list[i].headline)
+     //                          setReview(list[i].review)
+     //                          setName(list[i].name)
+     //                          setImageAsUrl(list[i].image.imgUrl);
+     //                          break;
+     //                     }
+     //                }
+     //      })
+     // }, [currentUser.uid,id]);
 
      return (
           <Container maxWidth="md" style={{ marginBottom: "5rem" }}>
@@ -248,7 +251,7 @@ const WriteReview = ({ WriteProductReview }) => {
                                         disabled={!imageAsFile}
                                    >
                                         {imageLoading ? (
-                                             <CircularProgress />
+                                             <CircularProgress size={20} style={{padding:'5px 20px 5px 20px'}} />
                                         ) : (
                                              <Typography
                                                   style={{

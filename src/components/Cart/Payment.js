@@ -140,7 +140,11 @@ const Payment = ({ deleteWholeCart, postOrders, cart }) => {
                               {line4},{line5},{pin}
                               <Typography>{country}</Typography>
                          </div>
-                         
+                         <StripeCheckout
+                              stripeKey="pk_test_51IKnzoC8IyWxRU85LCGIHqcp163lPc82rCxlx9gTrAbESUuORaRygP31Jtu862qpFe1HKRMWKHqE0a2KpxCT5ZH300B9ovPPW7"
+                              token={handleToken}
+                              amount={sum(cart) * 100}
+                         />
                     </div>
                </div>
           </Zoom>

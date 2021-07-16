@@ -1,7 +1,7 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { useAuth } from "../../firebase/AuthProvider";
 import { Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header({ length }) {
      const classes = useStyles();
+     const history = useHistory();
      const { currentUser, logout } = useAuth();
      const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -109,6 +110,11 @@ function Header({ length }) {
      const handleClose = () => {
           setAnchorEl(null);
      };
+     const handleLogout = async () => {
+          await logout();
+          window.location.reload();
+          history.push("/")
+     }
      return (
           <>
                <div className={classes.header}>
@@ -152,7 +158,7 @@ function Header({ length }) {
                                                   onClose={handleClose}
                                              >
                                                   <MenuItem
-                                                       onClick={() => logout()}
+                                                       onClick={handleLogout}
                                                   >
                                                        Logout
                                                   </MenuItem>

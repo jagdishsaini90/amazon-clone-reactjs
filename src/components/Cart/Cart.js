@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
      Grid,
      Button,
@@ -231,6 +231,13 @@ const Cart = ({
      const classes = useStyles();
      const [value, setValue] = React.useState(0);
 
+     useEffect(() => {
+          window.scrollTo({
+               top: 0,
+               left: 0,
+               behavior: 'smooth'
+          });
+     })
      const handleChange = (event, newValue) => {
           setValue(newValue);
      };
