@@ -90,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
           [theme.breakpoints.down("xs")]: {
                width: 150,
                fontSize: "8px",
+               marginRight :'10px',
           },
      },
      searchIcon: {
@@ -147,6 +148,7 @@ const Orders = ({ orders, postCart }) => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
+                              marginRight : '10px'
                          }}
                     >
                          <TextField
