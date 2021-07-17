@@ -52,6 +52,14 @@ const useStyles = makeStyles((theme) => ({
                marginBottom: "1.5rem",
           },
      },
+     reviewImage: {
+          width: '100px',
+          height: '100px',
+          [theme.breakpoints.down('xs')]: {
+               width: '100px',
+          height: '100px',
+          }
+     }
 }));
 const ProductContent = ({ product, isloading, postCart, length }) => {
      const classes = useStyles();
@@ -183,7 +191,7 @@ const ProductContent = ({ product, isloading, postCart, length }) => {
                                                        </p>
                                                   </Box>
                                                   {doc.image ? (
-                                                       <div style={{width:'70px',height:'70px'}}>
+                                                       <div className={classes.reviewImage}>
                                                             <img
                                                                  src={
                                                                       doc.image

@@ -4,9 +4,7 @@ import { useAuth } from "../../firebase/AuthProvider";
 import { makeStyles } from "@material-ui/core/styles";
 import Fade from "react-reveal/Fade";
 import Alert from "@material-ui/lab/Alert";
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
      login: {
@@ -87,6 +85,7 @@ function Login() {
           e.preventDefault();
           if (email === "" || password === "") {
                setError("Please Enter a valid email or password");
+               return;
           }
           setLoading(true);
           await login(email, password);
@@ -135,7 +134,11 @@ function Login() {
                                    onClick={signIn}
                                    className={classes.loginButton}
                               >
-                                   {loading ? <CircularProgress size={20} /> : "Sign In"}
+                                   {loading ? (
+                                        <CircularProgress size={20} />
+                                   ) : (
+                                        "Sign In"
+                                   )}
                               </button>
                          </form>
 

@@ -17,7 +17,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { toast } from "react-toastify";
 import Alert from "@material-ui/lab/Alert";
 import { useAuth } from "../../firebase/AuthProvider";
-import { firestore } from '../../firebase/firebase'
+import { firestore } from "../../firebase/firebase";
 
 toast.configure();
 const useStyles = makeStyles((theme) => ({
@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme) => ({
           },
      },
      showImage: {
-          maxWidth: '200px',
-          maxHeight: '200px',
-          overflow:'hidden',
+          maxWidth: "200px",
+          maxHeight: "200px",
+          overflow: "hidden",
           [theme.breakpoints.down("xs")]: {
                maxWidth: "250px",
-               maxHeight : '250px'
+               maxHeight: "250px",
           },
      },
 }));
@@ -147,14 +147,14 @@ const WriteReview = ({ WriteProductReview }) => {
 
           const res = await WriteProductReview(doc);
           if (!res) {
-               toast("Successfully reviewed :) ", { type : 'success'})
+               toast("Successfully reviewed :) ", { type: "success" });
+               history.push(`/product/${id}`);
+          } else {
+               toast("Sorry Unable to review :) ", { type: "error" });
+               history.push("/");
           }
-          else {
-               toast("Sorry Unable to review :) ", { type : 'error'})
-          }
-          history.push("/");
      };
-     
+
      useEffect(() => {
           window.scrollTo({
                top: 0,
@@ -251,7 +251,12 @@ const WriteReview = ({ WriteProductReview }) => {
                                         disabled={!imageAsFile}
                                    >
                                         {imageLoading ? (
-                                             <CircularProgress size={20} style={{padding:'5px 20px 5px 20px'}} />
+                                             <CircularProgress
+                                                  size={20}
+                                                  style={{
+                                                       padding: "5px 20px 5px 20px",
+                                                  }}
+                                             />
                                         ) : (
                                              <Typography
                                                   style={{

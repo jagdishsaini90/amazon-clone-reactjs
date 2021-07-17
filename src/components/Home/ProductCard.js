@@ -87,7 +87,6 @@ function Product({
      rating,
      postCart,
      description,
-     fetchSingleProduct,
 }) {
      const classes = useStyles();
      const history = useHistory();

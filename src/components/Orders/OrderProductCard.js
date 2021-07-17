@@ -146,7 +146,6 @@ const OrderProductCard = ({ order, postCart }) => {
                .catch((error) => console.log(error.message));
      }, [order.id]);
 
-     
      return (
           <Fade center>
                <div className={classes.main}>
