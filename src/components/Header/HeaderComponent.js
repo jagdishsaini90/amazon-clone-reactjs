@@ -1,11 +1,11 @@
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../firebase/AuthProvider";
 import { Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Menu, MenuItem } from "@material-ui/core";
+import SeachBar from "./SeachBar";
 
 const useStyles = makeStyles((theme) => ({
      header: {
@@ -30,31 +30,6 @@ const useStyles = makeStyles((theme) => ({
                width: 60,
                height: 60,
                marginTop: "14px",
-          },
-     },
-     headerSearch: {
-          display: "flex",
-          flex: "1",
-          alignItems: "center",
-          borderRadius: "24px",
-     },
-     searchInput: {
-          height: "12px",
-          padding: "10px",
-          border: "none",
-          width: "100%",
-          borderRadius: '5px 0 0 5px',
-          [theme.breakpoints.down("xs")]: {
-              borderRadius:'0'
-          },
-     },
-     searchIcon: {
-          padding: "5px",
-          height: "22px !important",
-          backgroundColor: "#cd9042",
-          borderRadius: '0 5px 5px 0',
-          [theme.breakpoints.down("xs")]: {
-              borderRadius:'0'
           },
      },
      headerNav: {
@@ -113,8 +88,10 @@ function Header({ length }) {
      const handleLogout = async () => {
           await logout();
           window.location.reload();
-          history.push("/")
-     }
+          history.push("/");
+     };
+     console.log("Header Page");
+
      return (
           <>
                <div className={classes.header}>
@@ -127,13 +104,7 @@ function Header({ length }) {
                     </Link>
 
                     <Hidden only={["xs"]}>
-                         <div className={classes.headerSearch}>
-                              <input
-                                   className={classes.searchInput}
-                                   type="text"
-                              />
-                              <SearchIcon className={classes.searchIcon} />
-                         </div>
+                         <SeachBar />
                     </Hidden>
 
                     <div className={classes.headerNav}>
@@ -146,7 +117,12 @@ function Header({ length }) {
                                                   aria-controls="simple-menu"
                                                   aria-haspopup="true"
                                                   onClick={handleClick}
-                                                  style={{color:'white',padding:'0',fontSize:'10px',fontWeight:'bold'}}
+                                                  style={{
+                                                       color: "white",
+                                                       padding: "0",
+                                                       fontSize: "10px",
+                                                       fontWeight: "bold",
+                                                  }}
                                              >
                                                   {currentUser.displayName}
                                              </Button>
@@ -165,11 +141,19 @@ function Header({ length }) {
                                              </Menu>
                                         </div>
                                    ) : (
-                                        <Link to="/login" style={{textDecoration:'none',color:'white'}}>Sign In</Link>
+                                        <Link
+                                             to="/login"
+                                             style={{
+                                                  textDecoration: "none",
+                                                  color: "white",
+                                             }}
+                                        >
+                                             Sign In
+                                        </Link>
                                    )}
                               </span>
                          </div>
-                         <Link to="/orders" style={{textDecoration:'none'}}>
+                         <Link to="/orders" style={{ textDecoration: "none" }}>
                               <div className={classes.headerOptions}>
                                    <span className={classes.optionLine1}>
                                         Returns
@@ -201,13 +185,7 @@ function Header({ length }) {
                     </div>
                </div>
                <Hidden only={["sm", "md", "lg", "xl"]}>
-                    <div
-                         className={classes.headerSearch}
-                         style={{ width: "100%" }}
-                    >
-                         <input className={classes.searchInput} type="text" />
-                         <SearchIcon className={classes.searchIcon} />
-                    </div>
+                    <SeachBar />
                </Hidden>
           </>
      );

@@ -4,7 +4,9 @@ import { useAuth } from "../../firebase/AuthProvider";
 
 
 export default function PrivateRoute({ component: Component, authenticated, ...rest }) {
-     const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
+     console.log("PrivateRoute Page")
+  
   return (
     <Route
       {...rest}

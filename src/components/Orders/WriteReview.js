@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import queryString from "query-string";
 import {
      Container,
@@ -17,7 +17,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { toast } from "react-toastify";
 import Alert from "@material-ui/lab/Alert";
 import { useAuth } from "../../firebase/AuthProvider";
-import { firestore } from "../../firebase/firebase";
+// import { firestore } from "../../firebase/firebase";
+var randomID = require("crypto").randomBytes(10).toString("hex");
 
 toast.configure();
 const useStyles = makeStyles((theme) => ({
@@ -89,46 +90,49 @@ const WriteReview = ({ WriteProductReview }) => {
      const [error, setError] = useState(null);
      const { id } = queryString.parse(useLocation().search);
 
-     const handleFireBaseUpload = (e) => {
-          e.preventDefault();
-          console.log("start of upload");
-          if (imageAsFile === "") {
-               console.error(
-                    `not an image, the image file is a ${typeof imageAsFile}`
-               );
-          }
-          setImageLoading(true);
-          const storage = firebase.storage();
-          const uploadTask = storage
-               .ref(`/images/${imageAsFile.name}`)
-               .put(imageAsFile);
-          uploadTask.on(
-               "state_changed",
-               (snapShot) => {
-                    console.log(snapShot);
-               },
-               (err) => {
-                    console.log(err);
-               },
-               () => {
-                    storage
-                         .ref("images")
-                         .child(imageAsFile.name)
-                         .getDownloadURL()
-                         .then((fireBaseUrl) => {
-                              setImageAsUrl((prevObject) => ({
-                                   ...prevObject,
-                                   imgUrl: fireBaseUrl,
-                              }));
-                              setImageLoading(false);
-                         });
+     const handleFireBaseUpload = React.useCallback(
+          (e) => {
+               e.preventDefault();
+               if (imageAsFile === "") {
+                    setError(
+                         `not an image, the image file is a ${typeof imageAsFile}`
+                    );
+                    return;
                }
-          );
-     };
+               setImageLoading(true);
+               const storage = firebase.storage();
+               const uploadTask = storage
+                    .ref(`/images/${imageAsFile.name}`)
+                    .put(imageAsFile);
+               uploadTask.on(
+                    "state_changed",
+                    (snapShot) => {},
+                    (err) => {
+                         setError(err.message);
+                    },
+                    () => {
+                         storage
+                              .ref("images")
+                              .child(imageAsFile.name)
+                              .getDownloadURL()
+                              .then((fireBaseUrl) => {
+                                   setImageAsUrl((prevObject) => ({
+                                        ...prevObject,
+                                        imgUrl: fireBaseUrl,
+                                   }));
+                                   setImageLoading(false);
+                              });
+                    }
+               );
+          },
+          [imageAsFile]
+     );
+
      const handleImageAsFile = (e) => {
           const image = e.target.files[0];
           setImageAsFile((imageFile) => image);
      };
+
      const handleReviewSubmit = async (e) => {
           e.preventDefault();
           if (name === "" || headline === "" || review === "" || rating === 0) {
@@ -137,14 +141,17 @@ const WriteReview = ({ WriteProductReview }) => {
           }
           let doc = {
                id,
+               reviewId: randomID,
                rating,
                image: imageAsUrl,
                headline,
                review,
                name,
                uid: currentUser.uid,
+               helpful: [],
+               report: [],
           };
-
+          console.log(randomID);
           const res = await WriteProductReview(doc);
           if (!res) {
                toast("Successfully reviewed :) ", { type: "success" });
@@ -182,190 +189,208 @@ const WriteReview = ({ WriteProductReview }) => {
      //                }
      //      })
      // }, [currentUser.uid,id]);
+     console.log("Review Write Page");
 
      return (
-          <Container maxWidth="md" style={{ marginBottom: "5rem" }}>
-               <Typography variant="h5" className={classes.heading}>
-                    Create Review
-               </Typography>
-               {error && <Alert severity="error">{error}</Alert>}
-               <hr style={{ color: "GrayText" }} />
-               <form onSubmit={handleReviewSubmit}>
-                    <div className={classes.fontType1}>
-                         <div>
-                              <Typography className={classes.fontType1}>
-                                   Overall rating
-                                   <span style={{ color: "red" }}>*</span>
-                              </Typography>
-                              <Box
-                                   component="fieldset"
-                                   mb={3}
-                                   borderColor="transparent"
-                                   className={classes.ratingBox}
-                              >
-                                   <Rating
-                                        name="simple-controlled"
-                                        value={rating}
-                                        style={{ paddingLeft: "0" }}
-                                        onChange={(event, newValue) => {
-                                             setRating(newValue);
-                                        }}
-                                   />
-                              </Box>
-                         </div>
-                    </div>
+          <>
+               <Container maxWidth="md" style={{ marginBottom: "5rem" }}>
+                    <Typography variant="h5" className={classes.heading}>
+                         Create Review
+                    </Typography>
+                    {error && <Alert severity="error">{error}</Alert>}
                     <hr style={{ color: "GrayText" }} />
-                    <div className={classes.addPhoto}>
-                         <Typography className={classes.fontType1}>
-                              Add a photo
-                         </Typography>
-                         <Typography
-                              className={classes.fontType2}
-                              variant="subtitle2"
-                              color="textSecondary"
-                         >
-                              Shoppers find images and videos more helpful than
-                              text alone.
-                         </Typography>
-                         <div>
-                              <form
-                                   onSubmit={handleFireBaseUpload}
-                                   style={{
-                                        display: "flex",
-                                        justifyContent: "flex-start",
-                                        alignItems: "center",
-                                        flexDirection: "row",
-                                   }}
-                              >
-                                   <input
-                                        type="file"
-                                        onChange={handleImageAsFile}
-                                   />
-                                   <Button
-                                        variant="contained"
-                                        color="default"
-                                        className={classes.button}
-                                        type="submit"
-                                        style={{ margin: "0", padding: "0" }}
-                                        onClick={handleFireBaseUpload}
-                                        disabled={!imageAsFile}
+                    <form onSubmit={handleReviewSubmit}>
+                         <div className={classes.fontType1}>
+                              <div>
+                                   <Typography className={classes.fontType1}>
+                                        Overall rating
+                                        <span style={{ color: "red" }}>*</span>
+                                   </Typography>
+                                   <Box
+                                        component="fieldset"
+                                        mb={3}
+                                        borderColor="transparent"
+                                        className={classes.ratingBox}
                                    >
-                                        {imageLoading ? (
-                                             <CircularProgress
-                                                  size={20}
-                                                  style={{
-                                                       padding: "5px 20px 5px 20px",
-                                                  }}
-                                             />
-                                        ) : (
-                                             <Typography
-                                                  style={{
-                                                       margin: "0",
-                                                       padding: "5px",
-                                                       display: "flex",
-                                                  }}
-                                                  className={classes.fontType2}
-                                             >
-                                                  <PhotoCamera
-                                                       style={{ width: "20px" }}
-                                                  />{" "}
-                                                  Upload Image
-                                             </Typography>
-                                        )}
-                                   </Button>
-                              </form>
-                              {imageAsFile ? (
-                                   <div className={classes.showImage}>
-                                        <img
-                                             src={imageAsUrl.imgUrl}
-                                             alt=""
-                                             width="100%"
-                                             height="100%"
+                                        <Rating
+                                             name="simple-controlled"
+                                             value={rating}
+                                             style={{ paddingLeft: "0" }}
+                                             onChange={(event, newValue) => {
+                                                  setRating(newValue);
+                                             }}
                                         />
-                                   </div>
-                              ) : null}
+                                   </Box>
+                              </div>
                          </div>
-                    </div>
-                    <hr style={{ color: "GrayText" }} />
-                    <div>
-                         <div>
+                         <hr style={{ color: "GrayText" }} />
+                         <div className={classes.addPhoto}>
                               <Typography className={classes.fontType1}>
-                                   Add a headline
-                                   <span style={{ color: "red" }}>*</span>
-                              </Typography>
-                              <TextField
-                                   type="text"
-                                   fullWidth
-                                   required
-                                   label="What's most important to know?"
-                                   value={headline}
-                                   onChange={(e) => setHeadLine(e.target.value)}
-                              />
-                         </div>
-                         <div>
-                              <Typography className={classes.fontType1}>
-                                   Add a written review
-                                   <span style={{ color: "red" }}>*</span>
-                              </Typography>
-                              <TextField
-                                   fullWidth
-                                   type="text"
-                                   label="What do you like or dislike"
-                                   value={review}
-                                   required
-                                   onChange={(e) => setReview(e.target.value)}
-                              />
-                         </div>
-                         <div>
-                              <Typography className={classes.fontType1}>
-                                   Choose your public name
-                                   <span style={{ color: "red" }}>*</span>
+                                   Add a photo
                               </Typography>
                               <Typography
                                    className={classes.fontType2}
                                    variant="subtitle2"
                                    color="textSecondary"
                               >
-                                   This is how you'll appear to other customers
+                                   Shoppers find images and videos more helpful
+                                   than text alone.
                               </Typography>
-                              <div
-                                   style={{
-                                        display: "flex",
-                                        justifyContent: "flex-start",
-                                        alignItems: "center",
-                                        flexDirection: "row",
-                                   }}
-                              >
-                                   <Avatar src="/broken-image.jpg" />
+                              <div>
+                                   <div
+                                        onSubmit={handleFireBaseUpload}
+                                        style={{
+                                             display: "flex",
+                                             justifyContent: "flex-start",
+                                             alignItems: "center",
+                                             flexDirection: "row",
+                                        }}
+                                   >
+                                        <input
+                                             type="file"
+                                             onChange={handleImageAsFile}
+                                        />
+                                        <Button
+                                             variant="contained"
+                                             color="default"
+                                             className={classes.button}
+                                             type="submit"
+                                             style={{
+                                                  margin: "0",
+                                                  padding: "0",
+                                             }}
+                                             onClick={handleFireBaseUpload}
+                                             disabled={!imageAsFile}
+                                        >
+                                             {imageLoading ? (
+                                                  <CircularProgress
+                                                       size={20}
+                                                       style={{
+                                                            padding: "5px 20px 5px 20px",
+                                                       }}
+                                                  />
+                                             ) : (
+                                                  <Typography
+                                                       style={{
+                                                            margin: "0",
+                                                            padding: "5px",
+                                                            display: "flex",
+                                                       }}
+                                                       className={
+                                                            classes.fontType2
+                                                       }
+                                                  >
+                                                       <PhotoCamera
+                                                            style={{
+                                                                 width: "20px",
+                                                            }}
+                                                       />{" "}
+                                                       Upload Image
+                                                  </Typography>
+                                             )}
+                                        </Button>
+                                   </div>
+                                   {imageAsFile ? (
+                                        <div className={classes.showImage}>
+                                             <img
+                                                  src={imageAsUrl.imgUrl}
+                                                  alt=""
+                                                  width="100%"
+                                                  height="100%"
+                                             />
+                                        </div>
+                                   ) : null}
+                              </div>
+                         </div>
+                         <hr style={{ color: "GrayText" }} />
+                         <div>
+                              <div>
+                                   <Typography className={classes.fontType1}>
+                                        Add a headline
+                                        <span style={{ color: "red" }}>*</span>
+                                   </Typography>
+                                   <TextField
+                                        type="text"
+                                        fullWidth
+                                        required
+                                        label="What's most important to know?"
+                                        value={headline}
+                                        onChange={(e) =>
+                                             setHeadLine(e.target.value)
+                                        }
+                                   />
+                              </div>
+                              <div>
+                                   <Typography className={classes.fontType1}>
+                                        Add a written review
+                                        <span style={{ color: "red" }}>*</span>
+                                   </Typography>
                                    <TextField
                                         fullWidth
                                         type="text"
                                         label="What do you like or dislike"
-                                        value={name}
+                                        value={review}
                                         required
                                         onChange={(e) =>
-                                             setName(e.target.value)
+                                             setReview(e.target.value)
                                         }
                                    />
                               </div>
-                              <Typography
-                                   className={classes.fontType2}
-                                   variant="subtitle2"
-                                   color="textSecondary"
-                                   style={{ marginBottom: "2rem" }}
-                              >
-                                   Don’t worry, you can always change this on
-                                   your profile
-                              </Typography>
+                              <div>
+                                   <Typography className={classes.fontType1}>
+                                        Choose your public name
+                                        <span style={{ color: "red" }}>*</span>
+                                   </Typography>
+                                   <Typography
+                                        className={classes.fontType2}
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                   >
+                                        This is how you'll appear to other
+                                        customers
+                                   </Typography>
+                                   <div
+                                        style={{
+                                             display: "flex",
+                                             justifyContent: "flex-start",
+                                             alignItems: "center",
+                                             flexDirection: "row",
+                                        }}
+                                   >
+                                        <Avatar src="/broken-image.jpg" />
+                                        <TextField
+                                             fullWidth
+                                             type="text"
+                                             label="What do you like or dislike"
+                                             value={name}
+                                             required
+                                             onChange={(e) =>
+                                                  setName(e.target.value)
+                                             }
+                                        />
+                                   </div>
+                                   <Typography
+                                        className={classes.fontType2}
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                        style={{ marginBottom: "2rem" }}
+                                   >
+                                        Don’t worry, you can always change this
+                                        on your profile
+                                   </Typography>
+                              </div>
                          </div>
-                    </div>
-                    <hr style={{ color: "GrayText" }} />
-                    <Button variant="outlined" onClick={handleReviewSubmit}>
-                         Submit
-                    </Button>
-               </form>
-          </Container>
+                         <hr style={{ color: "GrayText" }} />
+                         <Button
+                              variant="outlined"
+                              onClick={handleReviewSubmit}
+                         >
+                              Submit
+                         </Button>
+                    </form>
+               </Container>
+          </>
      );
 };
 
-export default WriteReview;
+export default memo(WriteReview);

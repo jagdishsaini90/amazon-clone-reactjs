@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Fade from "react-reveal/Fade";
 import { Link, useHistory } from "react-router-dom";
 import { firestore, auth } from "../../firebase/firebase";
+import AddressToolTip from "./AddressToolTip";
 import "./AddressHover.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
      },
      button: {
           backgroundColor: "rgb(235, 233, 233)",
-          fontSize: 12,
+          fontSize: "12px",
           fontWeight: "bold",
           [theme.breakpoints.down("xs")]: {
                maxWidth: 100,
-               fontSize: 6,
+               fontSize: "6px",
                padding: 2,
           },
      },
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
           justifyContent: "space-between",
           alignItems: "flex-start",
           flexDirection: "row",
-          padding: 5,
+          padding: "5px",
      },
      orderDetails: {
           display: "flex",
@@ -87,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
           justifyContent: "flex-start",
           alignItems: "flex-start",
           flexDirection: "column",
-          paddingLeft: 10,
+          paddingLeft: "10px",
           [theme.breakpoints.down("xs")]: {
                fontSize: "7px",
                maxWidth: "120px",
@@ -145,6 +146,7 @@ const OrderProductCard = ({ order, postCart }) => {
                })
                .catch((error) => console.log(error.message));
      }, [order.id]);
+     console.log("Order Product Card Page");
 
      return (
           <Fade center>
@@ -152,35 +154,39 @@ const OrderProductCard = ({ order, postCart }) => {
                     <div className={classes.mainItem1}>
                          <div className={classes.orderDetails}>
                               <Typography
-                                   variant="p"
+                                   variant="subtitle2"
                                    className={classes.details}
                                    style={{ marginRight: "1rem" }}
                               >
                                    ORDER PLACED
-                                   <Typography variant="p">
+                                   <Typography
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                   >
                                         {order.date.toDate().getDate()}{" "}
                                         {months[order.date.toDate().getMonth()]}{" "}
                                         {order.date.toDate().getFullYear()}
                                    </Typography>
                               </Typography>
                               <Typography
-                                   variant="p"
+                                   variant="subtitle2"
                                    className={classes.details}
                                    style={{ marginRight: "1rem" }}
                               >
                                    TOTAL
-                                   <Typography variant="p">
+                                   <Typography
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                   >
                                         ${order.price}
                                    </Typography>
                               </Typography>
-                              <Typography
-                                   variant="p"
-                                   className={classes.details}
-                              >
+                              <Typography className={classes.details}>
                                    SHIP TO
                                    <Typography
-                                        variant="p"
                                         className="tooltip"
+                                        variant="subtitle2"
+                                        color="textSecondary"
                                    >
                                         {order.address.fullname.toUpperCase()}
 
@@ -189,41 +195,24 @@ const OrderProductCard = ({ order, postCart }) => {
                                              id="tooltiptext"
                                              className={classes.addressData}
                                         >
-                                             {order.address.fullname}
-                                             <p
-                                                  style={{
-                                                       marginBottom: "0",
-                                                       marginTop: "0",
-                                                  }}
+                                             <Typography
+                                                  variant="subtitle2"
+                                                  color="textSecondary"
                                              >
-                                                  {order.address.line2 &&
-                                                       order.address.line2}
-                                                  {order.address.line1 &&
-                                                       `,${order.address.line1}`}
-                                                  {order.address.line3 &&
-                                                       `,${order.address.line3}`}
-                                                  ,{order.address.line4}
-                                             </p>
-                                             {order.address.line4.toUpperCase()}
-                                             ,
-                                             {order.address.line5.toUpperCase()}
-                                             ,{order.address.pin}
-                                             <Typography>
-                                                  {order.address.country}
+                                                  {order.address.fullname}
                                              </Typography>
+                                             <AddressToolTip order={order} />
                                         </div>
                                    </Typography>
                               </Typography>
                          </div>
                          <div style={{ marginRight: "1rem" }}>
                               <Typography
-                                   variant="p"
+                                   variant="subtitle2"
                                    className={classes.details}
                               >
                                    ORDER # 402-7581203-0973963
-                                   <Typography variant="p">
-                                        View order details 
-                                   </Typography>
+                                   <Typography>View order details</Typography>
                               </Typography>
                          </div>
                     </div>
@@ -239,13 +228,17 @@ const OrderProductCard = ({ order, postCart }) => {
                               </div>
                               <div className={classes.productDetails}>
                                    <Typography
-                                        variant="p"
+                                        variant="subtitle2"
                                         noWrap={false}
                                         style={{ color: "#0066c0" }}
                                    >
                                         {order.title}
                                    </Typography>
-                                   <Typography variant="p" noWrap>
+                                   <Typography
+                                        variant="subtitle2"
+                                        color="textSecondary"
+                                        noWrap
+                                   >
                                         Return window closed on 25-Aug-2020
                                    </Typography>
                                    <Button
@@ -265,7 +258,7 @@ const OrderProductCard = ({ order, postCart }) => {
                                         fullWidth
                                         style={{
                                              marginBottom: "5px",
-                                             fontWeight  : 'bold',
+                                             fontWeight: "bold",
                                         }}
                                         className={classes.button}
                                    >

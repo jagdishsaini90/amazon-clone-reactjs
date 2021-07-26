@@ -9,14 +9,18 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  loader: {
+    background :'#f0c14b'
+  }
 }));
 
 export default function Loader() {
   const classes = useStyles();
+     console.log("Loader Page")
 
   return (
     <div className={classes.root}>
-      <LinearProgress />
+      <LinearProgress className={classes.loader} />
     </div>
   );
 }

@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
      },
 }));
 
-export default function Address({ postAddress, address, deleteAddress }) {
+function Address({ postAddress, address, deleteAddress }) {
      const classes = useStyles();
      const [country, setCountry] = useState("INDIA");
      const [fullname, setFullName] = useState("");
@@ -120,6 +120,8 @@ export default function Address({ postAddress, address, deleteAddress }) {
           setNumber(null);
           setPin(null);
      };
+     console.log("Address Page")
+
 
      return (
           <Fade left>
@@ -244,7 +246,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    className={classes.form}
                                    value={fullname}
                                    required
@@ -260,7 +261,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
                               <input
                                    type="number"
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={number}
@@ -276,7 +276,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
                               <input
                                    type="number"
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={pin}
@@ -291,7 +290,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={line1}
@@ -306,7 +304,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={line2}
@@ -321,7 +318,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    className={classes.form}
                                    value={line3}
                                    onChange={(e) => setLine3(e.target.value)}
@@ -335,7 +331,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={line4}
@@ -350,7 +345,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    required
                                    className={classes.form}
                                    value={line5}
@@ -380,7 +374,6 @@ export default function Address({ postAddress, address, deleteAddress }) {
 
                               <input
                                    placeholder=""
-                                   variant="outlined"
                                    className={classes.form}
                                    value={line6}
                                    onChange={(e) => setLine6(e.target.value)}
@@ -400,3 +393,5 @@ export default function Address({ postAddress, address, deleteAddress }) {
           </Fade>
      );
 }
+
+export default  (Address)

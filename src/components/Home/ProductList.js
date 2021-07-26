@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./ProductCard";
+import Product from "../Cards/ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Fade from "react-reveal/Fade";
@@ -13,21 +13,26 @@ const useStyles = makeStyles((theme) => ({
           },
      },
 }));
-const ProductList = ({ products, postCart, fetchSingleProduct }) => {
+const ProductList = ({ products, postCart }) => {
      const classes = useStyles();
-     const list = products.map((doc) => {
+     let List = []
+     for (var i = 0; i < 30; i++) {
+          List[i] = products[i];
+     }
+     console.log("ProductList Page")
+
+     const list = List.map((doc) => {
           return (
                <Grid item xs={12} sm={4} md={3} key={doc._id}>
                     <Fade>
                          <Product
                               productID={doc._id}
                               title={doc.title}
-                              image={doc.filename}
-                              price={doc.price}
+                              image={doc.filename ? doc.filename : doc.images ? doc.images.medium.url : doc.image[1].medium}
+                              price={doc.price > 100 ? doc.price/100 : doc.price}
                               rating={doc.rating}
                               postCart={postCart}
                               description={doc.description}
-                              fetchSingleProduct={fetchSingleProduct}
                          />
                     </Fade>
                </Grid>
@@ -40,4 +45,4 @@ const ProductList = ({ products, postCart, fetchSingleProduct }) => {
      );
 };
 
-export default ProductList;
+export default (ProductList);

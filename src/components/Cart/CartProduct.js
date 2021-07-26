@@ -2,6 +2,7 @@ import React from "react";
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import INF from '../../images/INF.png'
 import "./CartProduct.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,12 +28,14 @@ function CheckoutProduct({
         <CircularProgress color="inherit" />
       </Backdrop>
     }
+     console.log("CartProduct Page")
+     
      return (
           <div className="checkoutProduct">
                <img
                     className="checkoutProduct__image"
                     src={image}
-                    alt={image}
+                    alt={INF}
                />
                <div className="checkoutProduct__info">
                     <p className="checkoutProduct__title">{title}</p>
@@ -59,4 +62,4 @@ function CheckoutProduct({
      );
 }
 
-export default CheckoutProduct;
+export default (CheckoutProduct);

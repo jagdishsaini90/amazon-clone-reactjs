@@ -27,11 +27,7 @@ function TabPanel(props) {
                aria-labelledby={`simple-tab-${index}`}
                {...other}
           >
-               {value === index && (
-                    <Box p={3}>
-                         <Typography>{children}</Typography>
-                    </Box>
-               )}
+               {value === index && <Box p={3}>{children}</Box>}
           </div>
      );
 }
@@ -90,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
           [theme.breakpoints.down("xs")]: {
                width: 150,
                fontSize: "8px",
-               marginRight :'10px',
+               marginRight: "10px",
           },
      },
      searchIcon: {
@@ -118,9 +114,10 @@ const Orders = ({ orders, postCart }) => {
                )
           );
      }, [search, orders]);
-     
+     console.log("Orders Page");
+
      return (
-          <Container maxWidth="md" component="div" style={{ padding: "0" }}>
+          <Container maxWidth="md" style={{ padding: "0" }}>
                <Breadcrumbs
                     aria-label="breadcrumb"
                     className={classes.breadcrumbs}
@@ -148,7 +145,7 @@ const Orders = ({ orders, postCart }) => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
-                              marginRight : '10px'
+                              marginRight: "10px",
                          }}
                     >
                          <TextField
@@ -176,11 +173,7 @@ const Orders = ({ orders, postCart }) => {
                          color="default"
                          style={{ boxShadow: "none", backgroundColor: "white" }}
                     >
-                         <Tabs
-                              value={value}
-                              onChange={handleChange}
-                              aria-label="simple tabs example"
-                         >
+                         <Tabs value={value} onChange={handleChange}>
                               <Tab
                                    label="Orders"
                                    {...a11yProps(0)}

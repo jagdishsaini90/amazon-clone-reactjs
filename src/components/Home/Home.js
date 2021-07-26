@@ -8,7 +8,6 @@ import ShowCaseCards from "./ShowcaseCards";
 import ImageSlider from './ImageSlider';
 
 
-
 const useStyles = makeStyles((theme) => ({
      ProductList: {
           position: "absolute",
@@ -28,15 +27,16 @@ const useStyles = makeStyles((theme) => ({
           [theme.breakpoints.down('xs')]: {
                height : '150px'
           }
-     }
+     },
 }));
 
 function Home({ products, isloading, postCart,fetchSingleProduct }) {
      const classes = useStyles();
-
      if (isloading) {
           return <Loader />;
      }
+     console.log("Home Page")
+
      return (
           <div>
                <div>
@@ -162,11 +162,11 @@ function Home({ products, isloading, postCart,fetchSingleProduct }) {
                          </Grid>
                     </Grid>
                     <div>
-                         <ProductList products={products} postCart={postCart} fetchSingleProduct={fetchSingleProduct} />
+                         <ProductList products={products} postCart={postCart} />
                     </div>
                </div>
           </div>
      );
 }
 
-export default Home;
+export default (Home);

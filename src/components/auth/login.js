@@ -57,8 +57,10 @@ const useStyles = makeStyles((theme) => ({
           backgroundColor: "white",
           width: "98%",
           fontWeight: "bold",
+          borderColor: '#a88734 #9c7e31 #846a29',
+          borderRadius : '5px',
           [theme.breakpoints.down("xs")]: {
-               height: "20px",
+               height: "30px",
           },
      },
      SignIn: {
@@ -81,6 +83,8 @@ function Login() {
      const [password, setPassword] = useState("");
      const [error, setError] = useState(null);
      const [loading, setLoading] = useState(false);
+
+
      const signIn = async (e) => {
           e.preventDefault();
           if (email === "" || password === "") {
@@ -91,9 +95,8 @@ function Login() {
           await login(email, password);
           setLoading(false);
           history.push("/");
-          window.location.reload();
      };
-
+     console.log("Login Page")
      return (
           <Fade>
                <div className={classes.login}>
@@ -166,4 +169,4 @@ function Login() {
      );
 }
 
-export default Login;
+export default (Login);

@@ -65,14 +65,36 @@ export const postCart = (data) => (dispatch) => {
      if (!auth.currentUser) {
           return;
      }
-     return firestore
-          .collection(`users`)
+     firestore
+          .collection("users")
           .doc(auth.currentUser.uid)
-          .update({
-               cart: firebase.firestore.FieldValue.arrayUnion(data),
+          .get()
+          .then((res) => {
+               return res.data().cart;
           })
-          .then((data) => dispatch(fetchCart()))
-          .catch((error) => dispatch(cartFailed(error.message)));
+          .then((cart) => {
+               let flag = false;
+               for (var i = 0; i < cart.length; i++) {
+                    if (cart[i].id === data.id) {
+                         flag = true;
+                         break;
+                    }
+               }
+               if (flag) {
+                    return;
+               } else {
+                    return firestore
+                         .collection(`users`)
+                         .doc(auth.currentUser.uid)
+                         .update({
+                              cart: firebase.firestore.FieldValue.arrayUnion(
+                                   data
+                              ),
+                         })
+                         .then((data) => dispatch(fetchCart()))
+                         .catch((error) => dispatch(cartFailed(error.message)));
+               }
+          });
 };
 
 export const addOrders = (data) => ({

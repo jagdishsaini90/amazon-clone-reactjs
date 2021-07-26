@@ -20,6 +20,7 @@ import Loader from "../Loader/Loader";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
+import MoreItems from "./MoreItems.js";
 
 function sum(cart) {
      let SUM = 0;
@@ -163,61 +164,7 @@ const useStyles = makeStyles((theme) => ({
                maxWidth: "80%",
                textAlign: "center",
           },
-     },
-     More: {
-          backgroundColor: "white",
-          padding: "10px",
-          borderRadius: "10px",
-          width: "100%",
-          [theme.breakpoints.down("xs")]: {
-               width: "85%",
-          },
-     },
-     MoreItems: {
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          flexDirection: "row",
-          padding: "5px",
-          borderRadius: "10px",
-          borderBottom: "1px solid grey",
-          [theme.breakpoints.down("xs")]: {
-               fontSize: "10px",
-          },
-     },
-     MoreItemImage: {
-          width: "100px",
-          height: "100px",
-          marginRight: "10px",
-          [theme.breakpoints.down("xs")]: {
-               width: "60px",
-               height: "60px",
-          },
-     },
-     MoreItemInfo: {
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          flexDirection: "column",
-          marginBottom: "0",
-     },
-     MoreItemButton: {
-          backgroundColor: "#FFD814",
-          borderColor: "#a88734 #9c7e31 #846a29",
-          border: ".5px solid black",
-          cursor: "pointer",
-          [theme.breakpoints.down("xs")]: {
-               fontSize: "7px",
-          },
-     },
-     MoreItemRating: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "row",
-          marginBottom: "0",
-          marginTop: "0",
-     },
+     }
 }));
 
 const Cart = ({
@@ -227,6 +174,7 @@ const Cart = ({
      cartLoading,
      length,
      postCart,
+     products,
 }) => {
      const classes = useStyles();
      const [value, setValue] = React.useState(0);
@@ -235,9 +183,14 @@ const Cart = ({
           window.scrollTo({
                top: 0,
                left: 0,
-               behavior: 'smooth'
+               behavior: "smooth",
           });
-     })
+     });
+     var randomProducts = [];
+     for (var i = 0; i < 4; i++) {
+          var num = Math.floor(Math.random() * 100);
+          randomProducts.push(products[num]);
+     }
      const handleChange = (event, newValue) => {
           setValue(newValue);
      };
@@ -245,6 +198,7 @@ const Cart = ({
      if (cartLoading) {
           return <Loader />;
      }
+     console.log("Cart Page");
 
      return (
           <Grid container spacing={2} className={classes.gridArea}>
@@ -421,216 +375,11 @@ const Cart = ({
                               </div>
                          </div>
                     ) : (
-                         <div
-                              style={{
-                                   display: "flex",
-                                   justifyContent: "center",
-                                   alignItems: "center",
-                                   flexDirection: "column",
-                              }}
-                              key=""
-                         >
-                              <div className={classes.More}>
-                                   <p>More items to explore</p>
-                                   <div className={classes.MoreItems}>
-                                        <img
-                                             src="https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fsp.jpeg?alt=media&token=8d13d0a6-b46b-40a8-ac38-64f36176869f"
-                                             alt="speaker"
-                                             className={classes.MoreItemImage}
-                                        />
-                                        <div className={classes.MoreItemInfo}>
-                                             <Link
-                                                  style={{
-                                                       marginBottom: "0",
-                                                       textDecoration: "none",
-                                                  }}
-                                             >
-                                                  Amazon Echo (3rd generation) |
-                                                  Smart speaker with Alexa,
-                                                  Charcoal Fabric
-                                             </Link>
-                                             <div
-                                                  className={
-                                                       classes.MoreItemRating
-                                                  }
-                                             >
-                                                  {Array(5)
-                                                       .fill()
-                                                       .map((_, i) => (
-                                                            <p>🌟</p>
-                                                       ))}
-                                             </div>
-                                             <p style={{ marginTop: "0" }}>
-                                                  $98.99
-                                             </p>
-                                             <button
-                                                  className={
-                                                       classes.MoreItemButton
-                                                  }
-                                                  onClick={() =>
-                                                       postCart({
-                                                            id: "23445930",
-                                                            title: "Amazon Echo (3rd generation) | Smart speaker with Alexa, Charcoal Fabric",
-                                                            price: 98.99,
-                                                            image: "https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fsp.jpeg?alt=media&token=8d13d0a6-b46b-40a8-ac38-64f36176869f",
-                                                            rating: 5,
-                                                       })
-                                                  }
-                                             >
-                                                  Add to Cart
-                                             </button>
-                                        </div>
-                                   </div>
-                                   <div className={classes.MoreItems}>
-                                        <img
-                                             src="https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Ftablet.jpg?alt=media&token=4df2e18f-c88b-47b2-8d34-9d9f9875f8d1"
-                                             alt="speaker"
-                                             className={classes.MoreItemImage}
-                                        />
-                                        <div className={classes.MoreItemInfo}>
-                                             <Link
-                                                  style={{
-                                                       marginBottom: "0",
-                                                       textDecoration: "none",
-                                                  }}
-                                             >
-                                                  New Apple iPad Pro (12.9-inch,
-                                                  Wi-Fi, 128GB) - Silver (4th
-                                                  Generation)
-                                             </Link>
-                                             <div
-                                                  className={
-                                                       classes.MoreItemRating
-                                                  }
-                                             >
-                                                  {Array(4)
-                                                       .fill()
-                                                       .map((_, i) => (
-                                                            <p>🌟</p>
-                                                       ))}
-                                             </div>
-                                             <p style={{ marginTop: "0" }}>
-                                                  $598.99
-                                             </p>
-                                             <button
-                                                  className={
-                                                       classes.MoreItemButton
-                                                  }
-                                                  onClick={() =>
-                                                       postCart({
-                                                            id: "3254354345",
-                                                            title: "New Apple iPad Pro (12.9-inch, Wi-Fi, 128GB) - Silver (4th Generation)",
-                                                            price: 598.99,
-                                                            image: "https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Ftablet.jpg?alt=media&token=4df2e18f-c88b-47b2-8d34-9d9f9875f8d1",
-                                                            rating: 4,
-                                                       })
-                                                  }
-                                             >
-                                                  Add to Cart
-                                             </button>
-                                        </div>
-                                   </div>
-                                   <div className={classes.MoreItems}>
-                                        <img
-                                             src="https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fmonitor.jpg?alt=media&token=96ef7408-2182-4aae-bded-9f4ff53f03fa"
-                                             alt="speaker"
-                                             className={classes.MoreItemImage}
-                                        />
-                                        <div className={classes.MoreItemInfo}>
-                                             <Link
-                                                  style={{
-                                                       marginBottom: "0",
-                                                       textDecoration: "none",
-                                                  }}
-                                             >
-                                                  Samsung LC49RG90SSUXEN 49'
-                                                  Curved LED Gaming Monitor -
-                                                  Super Ultra Wide Dual WQHD
-                                                  5120 x 1440
-                                             </Link>
-                                             <div
-                                                  className={
-                                                       classes.MoreItemRating
-                                                  }
-                                             >
-                                                  {Array(4)
-                                                       .fill()
-                                                       .map((_, i) => (
-                                                            <p>🌟</p>
-                                                       ))}
-                                             </div>
-                                             <p style={{ marginTop: "0" }}>
-                                                  $1094.98
-                                             </p>
-                                             <button
-                                                  className={
-                                                       classes.MoreItemButton
-                                                  }
-                                                  onClick={() =>
-                                                       postCart({
-                                                            id: "4903850",
-                                                            title: "Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor",
-                                                            price: 199.99,
-                                                            image: "https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fmonitor.jpg?alt=media&token=96ef7408-2182-4aae-bded-9f4ff53f03fa",
-                                                            rating: 3,
-                                                       })
-                                                  }
-                                             >
-                                                  Add to Cart
-                                             </button>
-                                        </div>
-                                   </div>
-                                   <div className={classes.MoreItems}>
-                                        <img
-                                             src="https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fsw.jpg?alt=media&token=4070ccdd-84a1-4d61-96a6-f04f6198acb2"
-                                             alt="speaker"
-                                             className={classes.MoreItemImage}
-                                        />
-                                        <div className={classes.MoreItemInfo}>
-                                             <Link
-                                                  style={{
-                                                       marginBottom: "0",
-                                                       textDecoration: "none",
-                                                  }}
-                                             >
-                                                  Kenwood kMix Stand Mixer for
-                                                  Baking, Stylish Kitchen Mixer
-                                                  with K-beater, Dough Hook and
-                                                  Whisk, 5 Litre Glass Bowl
-                                             </Link>
-                                             <div
-                                                  className={
-                                                       classes.MoreItemRating
-                                                  }
-                                             >
-                                                  {Array(4)
-                                                       .fill()
-                                                       .map((_, i) => (
-                                                            <p>🌟</p>
-                                                       ))}
-                                             </div>
-                                             <p style={{ marginTop: "0" }}>
-                                                  $239.30
-                                             </p>
-                                             <button
-                                                  className={
-                                                       classes.MoreItemButton
-                                                  }
-                                                  onClick={() =>
-                                                       postCart({
-                                                            id: "49538094",
-                                                            title: "Kenwood kMix Stand Mixer for Baking, Stylish Kitchen Mixer with K-beater, Dough Hook and Whisk, 5 Litre Glass Bowl",
-                                                            price: 239.0,
-                                                            image: "https://firebasestorage.googleapis.com/v0/b/e-commerce-b9e60.appspot.com/o/images%2Fsw.jpg?alt=media&token=4070ccdd-84a1-4d61-96a6-f04f6198acb2",
-                                                            rating: 4,
-                                                       })
-                                                  }
-                                             >
-                                                  Add to Cart
-                                             </button>
-                                        </div>
-                                   </div>
-                              </div>
+                              <div>
+                                   <p>More items to Buy</p>
+                              {randomProducts ? (
+                                   <MoreItems randomProducts={randomProducts} postCart={postCart} />
+                              ) : null}
                          </div>
                     )}
                </Grid>

@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import { PRODUCTS } from "./products";
 import { CART } from "./cart";
 import { ORDERS } from './orders';
@@ -14,7 +14,7 @@ export const ConfigStore = () => {
                orders: ORDERS,
                address: ADDRESS,
           }),
-          applyMiddleware(thunk, logger)
+          applyMiddleware(thunk)
      );
      return store;
 };

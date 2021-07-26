@@ -88,6 +88,7 @@ function ShowCaseCards({
           await postCart({ id, title, image, price, rating });
           history.push("/cart");
      };
+     console.log("ShowCaseCard Page")
 
      return (
           <div className={classes.Mainproduct} key={id}>
@@ -128,4 +129,4 @@ function ShowCaseCards({
      );
 }
 
-export default ShowCaseCards;
+export default (ShowCaseCards);

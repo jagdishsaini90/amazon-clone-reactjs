@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star";
 import { Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import INF from '../../images/INF.png'
 
 const useStyles = makeStyles((theme) => ({
      Mainproduct: {
@@ -89,14 +90,18 @@ function Product({
      description,
 }) {
      const classes = useStyles();
-     const history = useHistory();
+     const history = useHistory(); 
+
      const handlePost = async () => {
-          await postCart({ id: productID, title, image, price, rating });
+          var newPrice = price > 100 ? price / 100 : price
+          await postCart({ id: productID, title, image, price : newPrice, rating });
           history.push("/cart");
      };
+     console.log("ProductCard Page")
+
      return (
-          <div className={classes.Mainproduct} key={productID}>
-               <img src={image} alt="" className={classes.Image} />
+          <div className={classes.Mainproduct}>
+               <img src={image ? image : INF } alt="" className={classes.Image} />
                <div className={classes.productInfo}>
                     <Link
                          to={`/product/${productID}`}
@@ -121,10 +126,10 @@ function Product({
                     </Typography>
                     <p className={classes.price}>
                          <small>$</small>
-                         <strong>{price}</strong>
+                         <strong>{price ? price : 12.99}</strong>
                     </p>
                     <div className={classes.Rating}>
-                         {Array(rating)
+                         {Array(rating > 1 ? rating : 3)
                               .fill()
                               .map((_, i) => (
                                    <StarIcon className={classes.ratingIcon} />

@@ -117,6 +117,8 @@ const Payment = ({ deleteWholeCart, postOrders, cart }) => {
                history.push("/cart");
           }
      }
+     console.log("Payment Page")
+
      return (
           <Zoom>
                <div className={classes.root}>
@@ -151,4 +153,4 @@ const Payment = ({ deleteWholeCart, postOrders, cart }) => {
      );
 };
 
-export default Payment;
+export default (Payment);
