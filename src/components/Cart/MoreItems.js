@@ -80,49 +80,45 @@ const MoreItems = ({ randomProducts, postCart }) => {
                          alt={doc.title}
                          className={classes.MoreItemImage}
                     />
-                    <Link
-                         style={{
-                              marginBottom: "0",
-                              textDecoration: "none",
-                         }}
-                         to={`/product/${doc._id}`}
-                    >
-                         <div className={classes.MoreItemInfo}>
+                    <div className={classes.MoreItemInfo}>
+                         <Link
+                              style={{
+                                   marginBottom: "0",
+                                   textDecoration: "none",
+                              }}
+                              to={`/product/${doc._id}`}
+                         >
                               {doc.title}
-                              <div className={classes.MoreItemRating}>
-                                   {Array(doc.rating ? doc.rating : 3)
-                                        .fill()
-                                        .map((_, i) => (
-                                             <p key={i}>🌟</p>
-                                        ))}
-                              </div>
-                              <p style={{ marginTop: "0" }}>
-                                   ${doc.price ? doc.price : 12.99}
-                              </p>
-                              <button
-                                   className={classes.MoreItemButton}
-                                   onClick={() =>
-                                        postCart({
-                                             id: doc._id,
-                                             title: doc.title,
-                                             price: doc.price
-                                                  ? doc.price
-                                                  : 12.99,
-                                             image: doc.filename
-                                                  ? doc.filename
-                                                  : doc.images
-                                                  ? doc.images.medium.url
-                                                  : doc.image[1].medium,
-                                             rating: doc.rating
-                                                  ? doc.rating
-                                                  : 4,
-                                        })
-                                   }
-                              >
-                                   Add to Cart
-                              </button>
+                         </Link>
+                         <div className={classes.MoreItemRating}>
+                              {Array(doc.rating ? doc.rating : 3)
+                                   .fill()
+                                   .map((_, i) => (
+                                        <p key={i}>🌟</p>
+                                   ))}
                          </div>
-                    </Link>
+                         <p style={{ marginTop: "0" }}>
+                              ${doc.price ? doc.price : 12.99}
+                         </p>
+                         <button
+                              className={classes.MoreItemButton}
+                              onClick={() =>
+                                   postCart({
+                                        id: doc._id,
+                                        title: doc.title,
+                                        price: doc.price ? doc.price : 12.99,
+                                        image: doc.filename
+                                             ? doc.filename
+                                             : doc.images
+                                             ? doc.images.medium.url
+                                             : doc.image[1].medium,
+                                        rating: doc.rating ? doc.rating : 4,
+                                   })
+                              }
+                         >
+                              Add to Cart
+                         </button>
+                    </div>
                </div>
           );
      });

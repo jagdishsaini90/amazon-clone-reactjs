@@ -65,94 +65,97 @@ const SeachBar = () => {
      }
 
      return (
-               <div className={classes.headerSearch} style={{ width: "100%" }}>
-                    <Button
-                         ref={anchorRef}
-                         aria-controls={open ? "menu-list-grow" : undefined}
-                         aria-haspopup="true"
-                         onClick={handleToggle}
-                         style={{
-                              color: "black",
-                              fontWeight: "bold",
-                              backgroundColor: "rgb(223, 219, 219)",
-                              padding: "5px",
-                              zIndex: "20",
-                         }}
-                    >
-                         All <ExpandMoreIcon style={{ width: "20px" }} />
-                    </Button>
-                    <Popper
-                         open={open}
-                         anchorEl={anchorRef.current}
-                         role={undefined}
-                         transition
-                         disablePortal
-                         style={{ zIndex: "1000" }}
-                    >
-                         {({ TransitionProps, placement }) => (
-                              <Grow
-                                   {...TransitionProps}
-                                   style={{
-                                        transformOrigin:
-                                             placement === "bottom"
-                                                  ? "center top"
-                                                  : "center bottom",
-                                   }}
-                              >
-                                   <Paper>
-                                        <ClickAwayListener
-                                             onClickAway={handleMenuClose}
+          <div className={classes.headerSearch} style={{ width: "100%" }}>
+               <Button
+                    ref={anchorRef}
+                    aria-controls={open ? "menu-list-grow" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    style={{
+                         color: "black",
+                         fontWeight: "bold",
+                         backgroundColor: "rgb(223, 219, 219)",
+                         padding: "5px",
+                         zIndex: "20",
+                    }}
+               >
+                    All <ExpandMoreIcon style={{ width: "20px" }} />
+               </Button>
+               <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
+                    style={{ zIndex: "1000" }}
+               >
+                    {({ TransitionProps, placement }) => (
+                         <Grow
+                              {...TransitionProps}
+                              style={{
+                                   transformOrigin:
+                                        placement === "bottom"
+                                             ? "center top"
+                                             : "center bottom",
+                              }}
+                         >
+                              <Paper>
+                                   <ClickAwayListener
+                                        onClickAway={handleMenuClose}
+                                   >
+                                        <MenuList
+                                             autoFocusItem={open}
+                                             id="menu-list-grow"
+                                             onKeyDown={handleListKeyDown}
                                         >
-                                             <MenuList
-                                                  autoFocusItem={open}
-                                                  id="menu-list-grow"
-                                                  onKeyDown={handleListKeyDown}
-                                             >
-                                                  <MenuItem>
-                                                       <Link
-                                                            to={"/books"}
-                                                            style={{
-                                                                 textDecoration:
-                                                                      "none",
-                                                                 color: "black",
-                                                            }}
-                                                       >
-                                                            Books
-                                                       </Link>
-                                                  </MenuItem>
-                                                  <MenuItem>
-                                                       <Link
-                                                            to={"/games"}
-                                                            style={{
-                                                                 textDecoration:
-                                                                      "none",
-                                                                 color: "black",
-                                                            }}
-                                                       >
-                                                            Games
-                                                       </Link>
-                                                  </MenuItem>
-                                                  <MenuItem>
-                                                       <Link
-                                                            to={"/ebooks"}
-                                                            style={{
-                                                                 textDecoration:
-                                                                      "none",
-                                                                 color: "black",
-                                                            }}
-                                                       >
-                                                            eBooks
-                                                       </Link>
-                                                  </MenuItem>
-                                             </MenuList>
-                                        </ClickAwayListener>
-                                   </Paper>
-                              </Grow>
-                         )}
-                    </Popper>
-                    <input className={classes.searchInput} type="text" />
-                    <SearchIcon className={classes.searchIcon} />
-               </div>
+                                             <MenuItem>
+                                                  <Link
+                                                       to={"/books"}
+                                                       style={{
+                                                            textDecoration:
+                                                                 "none",
+                                                            color: "black",
+                                                       }}
+                                                       onClick={handleMenuClose}
+                                                  >
+                                                       Books
+                                                  </Link>
+                                             </MenuItem>
+                                             <MenuItem>
+                                                  <Link
+                                                       to={"/games"}
+                                                       style={{
+                                                            textDecoration:
+                                                                 "none",
+                                                            color: "black",
+                                                       }}
+                                                       onClick={handleMenuClose}
+                                                  >
+                                                       Games
+                                                  </Link>
+                                             </MenuItem>
+                                             <MenuItem>
+                                                  <Link
+                                                       to={"/ebooks"}
+                                                       style={{
+                                                            textDecoration:
+                                                                 "none",
+                                                            color: "black",
+                                                       }}
+                                                       onClick={handleMenuClose}
+                                                  >
+                                                       eBooks
+                                                  </Link>
+                                             </MenuItem>
+                                        </MenuList>
+                                   </ClickAwayListener>
+                              </Paper>
+                         </Grow>
+                    )}
+               </Popper>
+               <input className={classes.searchInput} type="text" />
+               <SearchIcon className={classes.searchIcon} />
+          </div>
      );
 };
 

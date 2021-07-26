@@ -1,15 +1,15 @@
 import React from "react";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
-import INF from '../../images/INF.png'
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { makeStyles } from "@material-ui/core/styles";
+import INF from "../../images/INF.png";
 import "./CartProduct.css";
 
 const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
-  },
+     backdrop: {
+          zIndex: theme.zIndex.drawer + 1,
+          color: "#fff",
+     },
 }));
 
 function CheckoutProduct({
@@ -18,25 +18,31 @@ function CheckoutProduct({
      title,
      price,
      rating,
-    deleteCart,
-     isloading
+     deleteCart,
+     isloading,
 }) {
-    const classes = useStyles();
-  
-    if (isloading) {
-      return <Backdrop className={classes.backdrop} open={isloading} >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    }
-     console.log("CartProduct Page")
-     
+     const classes = useStyles();
+
+     if (isloading) {
+          return (
+               <Backdrop className={classes.backdrop} open={isloading}>
+                    <CircularProgress color="inherit" />
+               </Backdrop>
+          );
+     }
+     console.log("CartProduct Page");
+
      return (
           <div className="checkoutProduct">
-               <img
-                    className="checkoutProduct__image"
-                    src={image}
-                    alt={INF}
-               />
+               {image ? (
+                    <img
+                         className="checkoutProduct__image"
+                         src={image}
+                         alt=""
+                    />
+               ) : (
+                    <img className="checkoutProduct__image" src={INF} alt="" />
+               )}
                <div className="checkoutProduct__info">
                     <p className="checkoutProduct__title">{title}</p>
                     <p className="checkoutProduct__price">
@@ -62,4 +68,4 @@ function CheckoutProduct({
      );
 }
 
-export default (CheckoutProduct);
+export default CheckoutProduct;
