@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ImageSlider() {
      const classes = useStyles();
-     console.log("ImageSlider Page");
 
      const itemData = [
           {

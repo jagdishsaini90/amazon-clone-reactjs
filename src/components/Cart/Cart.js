@@ -198,7 +198,6 @@ const Cart = ({
   if (cartLoading) {
     return <Loader />;
   }
-  console.log("Cart Page");
 
   return (
     <Grid container spacing={2} className={classes.gridArea}>

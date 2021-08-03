@@ -187,7 +187,6 @@ const WriteReview = ({ WriteProductReview }) => {
   //                }
   //      })
   // }, [currentUser.uid,id]);
-  console.log("Review Write Page");
 
   return (
     <>

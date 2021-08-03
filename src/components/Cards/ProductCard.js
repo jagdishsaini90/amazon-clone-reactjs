@@ -97,7 +97,6 @@ function Product({
     await postCart({ id: productID, title, image, price: newPrice, rating });
     history.push("/cart");
   };
-  console.log("ProductCard Page");
 
   return (
     <div className={classes.Mainproduct}>
@@ -132,7 +131,7 @@ function Product({
           {Array(rating > 1 ? rating : 3)
             .fill()
             .map((_, i) => (
-              <StarIcon className={classes.ratingIcon} />
+              <StarIcon key={i} className={classes.ratingIcon} />
             ))}
         </div>
         <Button className={classes.button} onClick={handlePost}>

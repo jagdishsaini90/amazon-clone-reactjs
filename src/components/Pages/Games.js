@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Games = ({ products, postCart, isloading }) => {
   const classes = useStyles();
-  console.log("Games Page");
   if (isloading) {
     return <Loader />;
   }

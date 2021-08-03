@@ -34,7 +34,6 @@ function Signup() {
           setLoading(false)
           history.push("/login");
      };
-     console.log("Signup Page")
 
      return (
           <Fade>

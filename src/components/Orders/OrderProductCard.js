@@ -146,7 +146,6 @@ const OrderProductCard = ({ order, postCart }) => {
       })
       .catch((error) => console.log(error.message));
   }, [order.id]);
-  console.log("Order Product Card Page");
 
   return (
     <Fade center>

@@ -30,7 +30,6 @@ function CheckoutProduct({
       </Backdrop>
     );
   }
-  console.log("CartProduct Page");
 
   return (
     <div className="checkoutProduct">

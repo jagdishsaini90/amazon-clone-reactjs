@@ -88,7 +88,6 @@ function ShowCaseCards({
     await postCart({ id, title, image, price, rating });
     history.push("/cart");
   };
-  console.log("ShowCaseCard Page");
 
   return (
     <div className={classes.Mainproduct} key={id}>
@@ -118,7 +117,7 @@ function ShowCaseCards({
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <StarIcon className={classes.ratingIcon} />
+              <StarIcon key={i} className={classes.ratingIcon} />
             ))}
         </div>
         <Button className={classes.button} onClick={handlePost}>

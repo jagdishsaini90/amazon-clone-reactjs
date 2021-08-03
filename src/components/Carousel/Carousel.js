@@ -3,7 +3,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 
 const CarouselComp = () => {
-     console.log("Carousel Page")
 
   return (
     <Carousel autoPlay={1000} showArrows={false} showStatus={false} infiniteLoop>

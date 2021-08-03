@@ -119,7 +119,6 @@ function Address({ postAddress, address, deleteAddress }) {
     setNumber(null);
     setPin(null);
   };
-  console.log("Address Page");
 
   return (
     <Fade left>

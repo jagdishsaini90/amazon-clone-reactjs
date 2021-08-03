@@ -88,7 +88,6 @@ const ProductContent = ({ product, isloading, postCart, length }) => {
     history.push("/cart");
   };
 
-  console.log("Product Page: ");
   return (
     <div key={product._id}>
       <Container maxWidth="md" style={{ marginBottom: "4rem" }}>

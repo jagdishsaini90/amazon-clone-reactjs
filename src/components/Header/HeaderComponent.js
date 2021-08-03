@@ -90,7 +90,6 @@ function Header({ length }) {
     window.location.reload();
     history.push("/");
   };
-  console.log("Header Page");
 
   return (
     <>

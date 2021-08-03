@@ -32,7 +32,6 @@ const EBooks = ({ ebooks, postCart, isloading }) => {
       behavior: "smooth",
     });
   });
-  console.log("eBooks Page");
 
   const list = ebooks.map((doc) => {
     return (

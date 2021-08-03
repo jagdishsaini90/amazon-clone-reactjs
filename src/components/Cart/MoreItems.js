@@ -65,8 +65,8 @@ const MoreItems = ({ randomProducts, postCart }) => {
   if (!randomProducts) {
     return null;
   }
-  var list = randomProducts.map((doc) => {
-    var key = Math.random().toString(16).slice(2);
+  let list = randomProducts.map((doc) => {
+    let key = Math.random().toString(16).slice(2);
     return (
       <div className={classes.MoreItems} key={key}>
         <img

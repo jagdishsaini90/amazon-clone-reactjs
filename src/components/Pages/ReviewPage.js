@@ -41,9 +41,7 @@ const ReviewPage = ({ doc, key, productId }) => {
       })
       .then((res) => {
         let list = res;
-        console.log(res);
         for (var i = 0; i < res.length; i++) {
-          console.log(list[i].helpful);
           if (list[i].id === id) {
             let helpful = list[i].helpful;
             for (var j = 0; j < helpful.length; i++) {

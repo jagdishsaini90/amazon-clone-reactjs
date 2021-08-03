@@ -19,7 +19,6 @@ const ProductList = ({ products, postCart }) => {
   for (var i = 0; i < 30; i++) {
     List[i] = products[i];
   }
-  console.log("ProductList Page");
 
   const list = List.map((doc) => {
     return (

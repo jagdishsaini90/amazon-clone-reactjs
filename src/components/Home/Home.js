@@ -34,7 +34,6 @@ function Home({ products, isloading, postCart, fetchSingleProduct }) {
   if (isloading) {
     return <Loader />;
   }
-  console.log("Home Page");
 
   return (
     <div>

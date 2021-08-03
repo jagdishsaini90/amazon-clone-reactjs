@@ -96,7 +96,6 @@ function Login() {
           setLoading(false);
           history.push("/");
      };
-     console.log("Login Page")
      return (
           <Fade>
                <div className={classes.login}>

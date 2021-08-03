@@ -16,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Loader() {
   const classes = useStyles();
-  console.log("Loader Page");
-
   return (
     <div className={classes.root}>
       <LinearProgress className={classes.loader} />

@@ -32,7 +32,6 @@ const Books = ({ books, postCart, isloading }) => {
       behavior: "smooth",
     });
   });
-  console.log("Books Page");
   const list = books.map((doc) => {
     return (
       <Grid item xs={12} sm={4} md={3} key={doc._id}>

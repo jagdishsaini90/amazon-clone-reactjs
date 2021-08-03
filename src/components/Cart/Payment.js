@@ -115,7 +115,6 @@ const Payment = ({ deleteWholeCart, postOrders, cart }) => {
       history.push("/cart");
     }
   }
-  console.log("Payment Page");
 
   return (
     <Zoom>

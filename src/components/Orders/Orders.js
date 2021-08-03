@@ -114,7 +114,6 @@ const Orders = ({ orders, postCart }) => {
       )
     );
   }, [search, orders]);
-  console.log("Orders Page");
 
   return (
     <Container maxWidth="md" style={{ padding: "0" }}>
