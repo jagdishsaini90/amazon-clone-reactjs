@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button,CircularProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import AddressComponent from "./AddressComponent";
 import { useStyles } from "./CartStyles";
 
-function Address({ postAddress, address, deleteAddress }) {
+function Address({ postAddress, address, deleteAddress, isLoading }) {
   const classes = useStyles();
   const [country, setCountry] = useState("INDIA");
   const [fullname, setFullName] = useState("");
@@ -86,16 +86,23 @@ function Address({ postAddress, address, deleteAddress }) {
         Select a delivery address
       </Typography>
       <hr />
-      <div>
-        {address.length > 0
-          ? address.map((doc) => {
-              return (
-                <AddressComponent doc={doc} deleteAddress={deleteAddress} />
-              );
-            })
-          : null}
-      </div>
-      {address.length > 0 ? <hr /> : null}
+      {isLoading ? (
+        <CircularProgress  />
+      ) : (
+        <>
+          {" "}
+          <div>
+            {address.length > 0
+              ? address.map((doc) => {
+                  return (
+                    <AddressComponent doc={doc} deleteAddress={deleteAddress} />
+                  );
+                })
+              : null}
+          </div>
+          {address.length > 0 ? <hr /> : null}{" "}
+        </>
+      )}
       <Container className={classes.root1}>
         <div>
           <Typography variant="p" color="primary">

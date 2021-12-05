@@ -147,6 +147,7 @@ class Main extends Component {
                 postAddress={this.props.postAddress}
                 address={this.props.address.address}
                 deleteAddress={this.props.deleteAddress}
+                isLoading = {this.props.address.isLoading}
               />
             )}
           />

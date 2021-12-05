@@ -6,7 +6,7 @@ import { Hidden } from "@material-ui/core";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import SeachBar from "./SeachBar";
 import { useStyles } from './HeaderStyles';
-
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 function Header({ length }) {
   const classes = useStyles();
@@ -31,11 +31,7 @@ function Header({ length }) {
     <>
       <div className={classes.header}>
         <Link to="/">
-          <img
-            className={classes.headerLogo}
-            src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-            alt="amazon"
-          />
+          <LocalMallIcon style={{color:"white",width:"100px"}} fontSize="100px" />
         </Link>
 
         <Hidden only={["xs"]}>
