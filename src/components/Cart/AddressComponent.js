@@ -33,7 +33,6 @@ const AddressComponent = ({ doc, deleteAddress }) => {
         <Button
           style={{
             backgroundColor: "#f0c14b",
-            borderColor: "#a88734 #9c7e31 #846a29",
           }}
           className={classes.button}
         >

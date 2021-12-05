@@ -238,7 +238,8 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   button: {
-    fontSize: "14px",
+    fontSize: "10px",
+    fontWeight: "bold",
     backgroundColor: "skyblue",
     [theme.breakpoints.down("xs")]: {
       fontSize: "10px",

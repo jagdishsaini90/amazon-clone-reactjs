@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   Container,
   Typography,
-  Breadcrumbs,
   TextField,
   InputAdornment,
   AppBar,
@@ -11,7 +10,6 @@ import {
   Tabs,
   Box,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import OrderProductCard from "./OrderProductCard";
 import { useStyles } from "./OrderStyles";
@@ -65,14 +63,6 @@ const Orders = ({ orders, postCart }) => {
 
   return (
     <Container maxWidth="md" style={{ padding: "0" }}>
-      <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
-        <Link to={"/"}>
-          <p>Your Account</p>
-        </Link>
-        <Link to={"/orders"}>
-          <p>Your Orders</p>
-        </Link>
-      </Breadcrumbs>
       <div
         style={{
           display: "flex",
@@ -130,15 +120,17 @@ const Orders = ({ orders, postCart }) => {
                   : `${filterdata.length} order`}{" "}
                 placed till now
               </p>
-              {filterdata.map((doc) => {
-                return (
-                  <OrderProductCard
-                    order={doc}
-                    key={doc.id}
-                    postCart={postCart}
-                  />
-                );
-              })}
+              {filterdata
+                ? filterdata.map((doc) => {
+                    return (
+                      <OrderProductCard
+                        order={doc}
+                        key={doc.id}
+                        postCart={postCart}
+                      />
+                    );
+                  })
+                : "loading...."}
             </div>
           ) : (
             "0 orders placed in"

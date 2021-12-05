@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import AddressComponent from "./AddressComponent";
 import { useStyles } from "./CartStyles";
 
-
 function Address({ postAddress, address, deleteAddress }) {
   const classes = useStyles();
   const [country, setCountry] = useState("INDIA");
@@ -54,6 +53,11 @@ function Address({ postAddress, address, deleteAddress }) {
       line4,
       line5,
       line6,
+    });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
     });
     setFullName("");
     setLine1("");
