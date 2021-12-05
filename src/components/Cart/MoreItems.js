@@ -1,63 +1,6 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-  More: {
-    backgroundColor: "white",
-    padding: "10px",
-    borderRadius: "10px",
-    width: "100%",
-    [theme.breakpoints.down("xs")]: {
-      width: "85%",
-    },
-  },
-  MoreItems: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "row",
-    padding: "5px",
-    borderRadius: "10px",
-    borderBottom: "1px solid grey",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-    },
-  },
-  MoreItemImage: {
-    width: "100px",
-    height: "100px",
-    marginRight: "10px",
-    [theme.breakpoints.down("xs")]: {
-      width: "60px",
-      height: "60px",
-    },
-  },
-  MoreItemInfo: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    marginBottom: "0",
-  },
-  MoreItemButton: {
-    backgroundColor: "#FFD814",
-    borderColor: "#a88734 #9c7e31 #846a29",
-    border: ".5px solid black",
-    cursor: "pointer",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "7px",
-    },
-  },
-  MoreItemRating: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: "0",
-    marginTop: "0",
-  },
-}));
+import { useStyles } from "./CartStyles";
 
 const MoreItems = ({ randomProducts, postCart }) => {
   const classes = useStyles();

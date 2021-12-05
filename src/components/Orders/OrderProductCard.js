@@ -1,106 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import Fade from "react-reveal/Fade";
 import { Link, useHistory } from "react-router-dom";
 import { firestore, auth } from "../../firebase/firebase";
 import AddressToolTip from "./AddressToolTip";
 import "./AddressHover.css";
+import { useStyles } from "./OrderStyles";
 
-const useStyles = makeStyles((theme) => ({
-  main: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    border: "1px solid black",
-    fontSize: "13px",
-    width: "100%",
-    overflow: "hidden",
-    marginBottom: "1rem",
-  },
-  buttons: {
-    marginRight: "1rem",
-    maxWidth: "250px",
-    [theme.breakpoints.down("xs")]: {
-      paddingLeft: "25px",
-    },
-  },
-  button: {
-    backgroundColor: "rgb(235, 233, 233)",
-    fontSize: "12px",
-    fontWeight: "bold",
-    [theme.breakpoints.down("xs")]: {
-      maxWidth: 100,
-      fontSize: "6px",
-      padding: 2,
-    },
-  },
-  details: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "7px",
-    },
-  },
-  mainItem1: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    padding: "7px",
-    backgroundColor: "rgb(235, 233, 233)",
-    borderBottom: "1px solid black",
-  },
-  mainItem2: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    flexDirection: "row",
-    padding: "5px",
-  },
-  orderDetails: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  product: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "row",
-  },
-  productImage: {
-    width: 100,
-    height: 120,
-    [theme.breakpoints.down("xs")]: {
-      width: 50,
-      height: 55,
-    },
-  },
-  productDetails: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    paddingLeft: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "7px",
-      maxWidth: "120px",
-    },
-  },
-  addressData: {
-    marginBottom: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "12px",
-    },
-  },
-}));
+
 
 const OrderProductCard = ({ order, postCart }) => {
   const months = [

@@ -1,63 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Container, Typography, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Fade from "react-reveal/Fade";
+import AddressComponent from "./AddressComponent";
+import { useStyles } from "./CartStyles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    marginBottom: "10rem",
-  },
-  addressTop: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flexDirection: "row",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-    },
-  },
-  typo: {
-    marginBottom: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "20px",
-    },
-  },
-  form: {
-    fontSize: "20px",
-    width: "350px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-      width: "200px",
-    },
-  },
-  formDiv: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "column",
-  },
-  button: {
-    fontSize: "14px",
-    backgroundColor: "skyblue",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-      backgroundColor: "rgb(221, 221, 221)",
-    },
-  },
-  typoGraph: {
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-    },
-  },
-  addressData: {
-    marginBottom: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "12px",
-    },
-  },
-}));
 
 function Address({ postAddress, address, deleteAddress }) {
   const classes = useStyles();
@@ -121,76 +67,32 @@ function Address({ postAddress, address, deleteAddress }) {
   };
 
   return (
-    <Fade left>
-      <Container className={classes.root}>
-        <div className={classes.addressTop}>
-          <Link to="/">
-            <img
-              className={classes.headerLogo}
-              src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-              alt="amazon"
-              width="150px"
-            />
-          </Link>
-        </div>
-        <Typography variant="h4" className={classes.typo}>
-          Select a delivery address
-        </Typography>
-        <div>
-          {address.length > 0 ? (
-            <div>
-              {address.map((doc) => {
-                return (
-                  <div key={doc.id} className={classes.addressData}>
-                    {doc.fullname}
-                    <p
-                      style={{
-                        marginBottom: "0",
-                        marginTop: "0",
-                      }}
-                    >
-                      {doc.line2 && doc.line2}
-                      {doc.line1 && `,${doc.line1}`}
-                      {doc.line3 && `,${doc.line3}`},{doc.line4}
-                    </p>
-                    {doc.line4.toUpperCase()},{doc.line5.toUpperCase()},
-                    {doc.pin}
-                    <Typography>{doc.country}</Typography>
-                    <Link
-                      to={`/payment?country=${doc.country}&fullname=${doc.fullname}&number=${doc.number}&pin=${doc.pin}&line1=${doc.line1}&line2=${doc.line2}&line3=${doc.line3}&line4=${doc.line4}&line5=${doc.line5}&line6=${doc.line}`}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <Button
-                        style={{
-                          backgroundColor: "#f0c14b",
-                          borderColor: "#a88734 #9c7e31 #846a29",
-                        }}
-                        className={classes.button}
-                      >
-                        Deliver to this address
-                      </Button>
-                    </Link>
-                    <button
-                      type="button"
-                      style={{
-                        marginLeft: "10px",
-                      }}
-                      onClick={() => deleteAddress(doc.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          ) : null}
-        </div>
-        <hr />
-
+    <>
+      <div className={classes.addressTop}>
+        <Link to="/">
+          <img
+            className={classes.headerLogo}
+            src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+            alt="amazon"
+            width="150px"
+          />
+        </Link>
+      </div>
+      <Typography variant="h4" className={classes.addresstypo}>
+        Select a delivery address
+      </Typography>
+      <hr />
+      <div>
+        {address.length > 0
+          ? address.map((doc) => {
+              return (
+                <AddressComponent doc={doc} deleteAddress={deleteAddress} />
+              );
+            })
+          : null}
+      </div>
+      {address.length > 0 ? <hr /> : null}
+      <Container className={classes.root1}>
         <div>
           <Typography variant="p" color="primary">
             Add a new Address
@@ -326,7 +228,7 @@ function Address({ postAddress, address, deleteAddress }) {
           </form>
         </div>
       </Container>
-    </Fade>
+    </>
   );
 }
 

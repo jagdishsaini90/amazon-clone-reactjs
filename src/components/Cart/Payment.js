@@ -2,13 +2,12 @@
 import React from "react";
 import queryString from "query-string";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useHistory, useLocation } from "react-router-dom";
-import amazonbg from "../../images/amazonbg.jpg";
 import Zoom from "react-reveal/Zoom";
+import { useStyles } from "./CartStyles";
 
 toast.configure();
 function sum(cart) {
@@ -19,51 +18,7 @@ function sum(cart) {
   return Math.round((SUM + Number.EPSILON) * 100) / 100;
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  background: {
-    width: "100vw",
-    height: "100vh",
-    backgroundImage: `url(${amazonbg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
-    filter: "blur(8px)",
-    WebkitFilter: "blur(8px)",
-  },
-  card: {
-    backgroundColor: "rgba(0,0,0,.4)",
-    color: "white",
-    fontWeight: "bold",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%,-50%)",
-    padding: "20px",
-    borderRadius: "10px",
-    width: "40%",
-    [theme.breakpoints.down("xs")]: {
-      width: "70%",
-    },
-  },
-  finalAddress: {
-    fontSize: "25px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "15px",
-    },
-  },
-  typo: {
-    fontSize: "3rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "2rem",
-    },
-  },
-}));
+
 
 const Payment = ({ deleteWholeCart, postOrders, cart }) => {
   const classes = useStyles();

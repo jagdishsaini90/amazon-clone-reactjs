@@ -12,9 +12,9 @@ import {
   Box,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import OrderProductCard from "./OrderProductCard";
+import { useStyles } from "./OrderStyles";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,58 +44,6 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-  tab: {
-    fontSize: "15px",
-    textTransform: "none",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-    },
-  },
-  breadcrumbs: {
-    fontSize: "13px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "8px",
-      marginLeft: "10px",
-    },
-  },
-  searchButton: {
-    backgroundColor: "black",
-    color: "white",
-    fontSize: "20px",
-    padding: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "8px",
-      padding: "5px",
-      marginRight: "5px",
-    },
-  },
-  orders: {
-    fontSize: "29px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "20px",
-      marginLeft: "10px",
-    },
-  },
-  textField: {
-    [theme.breakpoints.down("xs")]: {
-      width: 150,
-      fontSize: "8px",
-      marginRight: "10px",
-    },
-  },
-  searchIcon: {
-    [theme.breakpoints.down("xs")]: {
-      width: 20,
-      height: 20,
-    },
-  },
-}));
 
 const Orders = ({ orders, postCart }) => {
   const classes = useStyles();

@@ -10,36 +10,10 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useStyles } from './HeaderStyles';
 
-const useStyles = makeStyles((theme) => ({
-  headerSearch: {
-    display: "flex",
-    flex: "1",
-    alignItems: "center",
-    borderRadius: "24px",
-    width: "100%",
-  },
-  searchInput: {
-    height: "12px",
-    padding: "10px",
-    border: "none",
-    width: "100%",
-    [theme.breakpoints.down("xs")]: {
-      borderRadius: "0",
-    },
-  },
-  searchIcon: {
-    padding: "5px",
-    height: "22px !important",
-    backgroundColor: "#cd9042",
-    borderRadius: "0 5px 5px 0",
-    [theme.breakpoints.down("xs")]: {
-      borderRadius: "0",
-    },
-  },
-}));
+
 const SeachBar = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -107,10 +81,7 @@ const SeachBar = () => {
                   <MenuItem>
                     <Link
                       to={"/books"}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
+                      className={classes.link}
                       onClick={handleMenuClose}
                     >
                       Books
@@ -119,10 +90,7 @@ const SeachBar = () => {
                   <MenuItem>
                     <Link
                       to={"/games"}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
+                      className={classes.link}
                       onClick={handleMenuClose}
                     >
                       Games
@@ -131,10 +99,7 @@ const SeachBar = () => {
                   <MenuItem>
                     <Link
                       to={"/ebooks"}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                      }}
+                      className={classes.link}
                       onClick={handleMenuClose}
                     >
                       eBooks

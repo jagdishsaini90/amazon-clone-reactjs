@@ -9,7 +9,6 @@ import {
   Avatar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import firebase from "firebase";
@@ -17,63 +16,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { toast } from "react-toastify";
 import Alert from "@material-ui/lab/Alert";
 import { useAuth } from "../../firebase/AuthProvider";
+import { useStyles } from "./OrderStyles";
 // import { firestore } from "../../firebase/firebase";
 var randomID = require("crypto").randomBytes(10).toString("hex");
 
 toast.configure();
-const useStyles = makeStyles((theme) => ({
-  heading: {
-    marginTop: "3rem",
-    fontWeight: "bold",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "17px",
-    },
-  },
-  fontType1: {
-    marginTop: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "14px",
-      maxWidth: "300px",
-      marginTop: "10px",
-    },
-  },
-  fontType2: {
-    fontSize: "13px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-      maxWidth: "300px",
-      padding: "0",
-    },
-  },
-  input: {
-    display: "none",
-  },
-  button: {
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-    },
-  },
-  ratingBox: {
-    paddingLeft: "0",
-    [theme.breakpoints.down("xs")]: {
-      marginBottom: "0",
-    },
-  },
-  addPhoto: {
-    [theme.breakpoints.down("xs")]: {
-      marginTop: "2rem",
-    },
-  },
-  showImage: {
-    maxWidth: "200px",
-    maxHeight: "200px",
-    overflow: "hidden",
-    [theme.breakpoints.down("xs")]: {
-      maxWidth: "250px",
-      maxHeight: "250px",
-    },
-  },
-}));
+
 
 const WriteReview = ({ WriteProductReview }) => {
   const classes = useStyles();
@@ -244,7 +192,7 @@ const WriteReview = ({ WriteProductReview }) => {
                 <Button
                   variant="contained"
                   color="default"
-                  className={classes.button}
+                  className={classes.button1}
                   type="submit"
                   style={{
                     margin: "0",

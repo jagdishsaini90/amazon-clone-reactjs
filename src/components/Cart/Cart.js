@@ -21,6 +21,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import MoreItems from "./MoreItems.js";
+import { useStyles } from "./CartStyles";
 
 function sum(cart) {
   let SUM = 0;
@@ -62,110 +63,6 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  gridArea: {
-    backgroundColor: "#EAEDED",
-    padding: "20px",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    [theme.breakpoints.down("xs")]: {
-      padding: "5px",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  },
-  gridCartArea: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    padding: "0",
-    [theme.breakpoints.down("xs")]: {
-      marginTop: "2rem",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-  demo1: {
-    backgroundColor: "white",
-    boxShadow: "none",
-  },
-  EmptyCart: {
-    width: "95%",
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    marginBottom: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-      width: "80%",
-    },
-  },
-  YourItems: {
-    width: "95%",
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "10px",
-      width: "80%",
-    },
-  },
-  tabs: {
-    fontSize: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "8px",
-      padding: "0",
-      paddingLeft: "10px",
-    },
-  },
-  Extrainfo: {
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "8px",
-      maxWidth: "90%",
-    },
-  },
-  shoppingCart: {
-    backgroundColor: "white",
-    minWidth: "100%",
-    borderRadius: "10px",
-    marginBottom: "1rem",
-    paddingLeft: "10px",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "13px",
-      minWidth: "90%",
-    },
-  },
-  sideBar: {
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-    },
-  },
-  Payment: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    padding: "10px",
-    backgroundColor: "white",
-    [theme.breakpoints.down("xs")]: {
-      alignItems: "center",
-      fontSize: "12px",
-      maxWidth: "80%",
-      textAlign: "center",
-    },
-  },
-}));
 
 const Cart = ({
   cart,
