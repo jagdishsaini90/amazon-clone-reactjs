@@ -12,7 +12,6 @@ import {
   Box,
 } from "@material-ui/core";
 import amazon from "../../images/amazon.png";
-import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PropTypes from "prop-types";
 import CheckoutProduct from "./CartProduct";

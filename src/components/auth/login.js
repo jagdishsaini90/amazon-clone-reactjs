@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../firebase/AuthProvider";
-import Fade from "react-reveal/Fade";
 import Alert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./AuthStyles";
@@ -25,11 +24,11 @@ function Login() {
           }
           setLoading(true);
           await login(email, password);
-          setLoading(false);
           history.push("/");
+          window.location.reload();
+          setLoading(false);
      };
      return (
-          <Fade>
                <div className={classes.login}>
                     <Link to="/">
                          <img
@@ -96,7 +95,6 @@ function Login() {
                          </button>
                     </div>
                </div>
-          </Fade>
      );
 }
 
